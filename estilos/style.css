@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap'); 
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Poppins", sans-serif;
+    margin:0;
+    padding: 0;
+}
+
+.container{
+  position: relative;
+  z-index:99;
+}
+
+#particles-js{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+}
+
+.capp{
+    font-family: 'Dancing Script', cursive;
+}
+.nota{
+    margin-bottom: 15vh;
+}
+
+body {
+    font-size: 16px;
+}
+
+.w3-half img {
+    margin-bottom: -6px;
+    margin-top: 16px;
+    opacity: 0.8;
+    cursor: pointer
+}
+
+.w3-half img:hover {
+    opacity: 1
+}
+
+.unds{
+    display: flex;
+    margin:2px;
+    justify-content: space-around;
+}
+.opc1,.opc2{
+    transition: transform 1s;
+}
+
+.opc1:hover{
+    transform: scale(1.1);
+}
+.opc2:hover{
+    transform: scale(1.1);
+}
+
+.area_de_texto{
+    resize: none;
+}
+
+.login{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 40px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+
+
+/*CARACTERÍSTICAS DEL LOGIN*/
+
+* {
+    box-sizing: border-box;
+  }
+  
+  input[type=text]{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    text-transform:uppercase;
+    font-weight: bold;
+  }
+  
+  input[type=submit] {
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  .col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+  }
+  
+  .col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive layout - Luego de bajar de 600px */
+  @media screen and (max-width: 1000px) {
+    .col-25, .col-75, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+  } 
