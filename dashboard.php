@@ -18,15 +18,6 @@ $consulta_c->execute();
 $carreras = $consulta_c->fetchAll();
 ?>
 
-<?php
-/* ASIGNATURAS
-$consulta_m = $conexion_pdo->prepare("SELECT cod_materia,nombre FROM materia WHERE cod_carrera = '' ORDER BY nombre");
-$consulta_m->execute();
-$materias = $consulta_m->fetchAll();
-*/
-
-?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -48,10 +39,13 @@ $materias = $consulta_m->fetchAll();
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <title>ReacETA 2023</title>
 
-    <!--Script para cargar valor de select 1 y luego validarlo con la sentencia sql en el archivo materias.php-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!--Script para cargar valor de select carreras y luego validarlo con la sentencia sql en materias.php-->
     <script language="javascript">
     $(document).ready(function(){
         $("#s_c").on('change', function () {
+            $('#s_p').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
             $("#s_c option:selected").each(function () {
                 var id_carrera = $(this).val();
                 $.post("materias.php", { id_carrera: id_carrera }, function(data) {
@@ -60,6 +54,18 @@ $materias = $consulta_m->fetchAll();
             });
         });
         });
+
+    $(document).ready(function(){
+        $("#s_m").on('change', function () {
+            $("#s_m option:selected").each(function () {
+                var id_materia = $(this).val();
+                $.post("profesores.php", { id_materia: id_materia }, function(data) {
+                    $("#s_p").html(data);
+                });		
+            });
+        });
+        });
+
     </script>
 
 </head>
@@ -116,8 +122,24 @@ $materias = $consulta_m->fetchAll();
                     <p style="font-size:20px;line-height:0.6em;opacity:0.2; text-align: right;"><i class="fa fa-users" aria-hidden="true"></i> EQUIPO ETA</p>
               </div>
 
+              <!--alert-->
+              <?php
+              if (!empty($_SESSION['registro'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Reactivos registrados con éxito",
+                    text: "Enhorabuena",
+                    icon: "success",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+              }
+                ?>
 
-            <form action="" target="_blank">
+            <form action="distributivo.php" method="POST">
                 <div class="w3-section">
                     <label><b>Carrera</b></label>
                     <select class="w3-select" name="s_c" id="s_c">
@@ -132,17 +154,13 @@ $materias = $consulta_m->fetchAll();
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Asignatura</b></label>
+                    <label><b>Asignaturas:</b></label>
                     <select class="w3-select" name="s_m" id="s_m"></select>
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Profesor</b></label>
-                    <select class="w3-select" name="s_c" id="s_c">
-                        <option value="0" selected disabled>Seleccione al profesor</option>
-                        <!-- ooo -->
-                        
-                    </select>
+                    <label><b>Profesores:</b></label>
+                    <select class="w3-select" name="s_p" id="s_p"></select>
                 </div>
 
 
@@ -171,13 +189,24 @@ $materias = $consulta_m->fetchAll();
                     <br> 
                     <textarea name="observaciones" class="area_de_texto" id="" cols="100" rows="7"></textarea>
                 </div>
-                <div class="w3-section">
-                    <label><b>Técnico responsable</b></label>
-                    <input type="text" name="tec" id="" value="<?php echo $_SESSION["usuario"]?>" disabled>
-                    </select>
+                <div class="w3-row-padding">
+                    <div class="w3-half">
+                    <label><b>Fecha de Inicio</b></label>
+                        <input class="w3-input w3-border" name = "fi" type="date" placeholder="--/--/--">
+                    </div>
+                    <div class="w3-half">
+                    <label><b>Fecha de Fin</b></label>
+                        <input class="w3-input w3-border" name = "ff" type="date" placeholder="--/--/--">
+                    </div>
                 </div>
 
-                <button type="submit" class="w3-button w3-block w3-padding-large w3-green w3-margin-bottom">Registrar</button>
+                <div class="w3-section">
+                    <label><b>Técnico responsable</b></label>
+                    <input type="text" name="n_tec" id="" disabled value="<?php echo $_SESSION["usuario"]?>">
+                    <input type="hidden" name="tec" id="" value="<?php echo $_SESSION["cod_usuario"]?>">
+                    </select>
+                </div>
+                <input type="submit" class="w3-button w3-block w3-padding-large w3-green w3-margin-bottom" value="Registrar">
             </form>
         </div>
 
