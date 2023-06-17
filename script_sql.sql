@@ -41,8 +41,11 @@ unidad1 INTEGER NOT NULL,
 unidad2 INTEGER NOT NULL,
 unidad3 INTEGER NOT NULL,
 unidad4 INTEGER NOT NULL,
-fecha_ini DATE NOT NULL,
-fecha_fin DATE NOT NULL,
+r_t INTEGER NOT NULL,
+fecha_ini DATE,
+fecha_fin DATE,
+cod_tec INTEGER NOT NULL,
+observaciones VARCHAR(400),
 PRIMARY KEY(cod_distributivo)
 );
 
@@ -50,8 +53,6 @@ SELECT * FROM distributivo;
 TRUNCATE TABLE distributivo;
 DROP TABLE distributivo;
 
-ALTER TABLE distributivo
-ADD COLUMN cod_tec INTEGER NOT NULL;
 
 CREATE TABLE usuarios(
 cod_tec SERIAL NOT NULL,
@@ -63,6 +64,7 @@ PRIMARY KEY(cod_tec)
 
 SELECT * FROM usuarios;
 
+/*CONSTRAINT*/
 ALTER TABLE materia add constraint fk_cod_carrera foreign key (cod_carrera) references carrera(cod_carrera);
 ALTER TABLE profesor add constraint fk_cod_materia foreign key (cod_materia) references materia(cod_materia);
 ALTER TABLE distributivo add constraint fk_cod_carrera foreign key (cod_carrera) references carrera(cod_carrera);
@@ -70,7 +72,7 @@ ALTER TABLE distributivo add constraint fk_cod_materia foreign key (cod_materia)
 ALTER TABLE distributivo add constraint fk_id_profesor foreign key (id_profesor) references profesor(id_profesor);
 ALTER TABLE distributivo add constraint fk_cod_tec foreign key (cod_tec) references usuarios(cod_tec);
 
-/*Eliminando constraint */
+/*Eliminando constraint entre materia-carrera y profesor-carrera */
 ALTER TABLE materia
 DROP CONSTRAINT fk_cod_carrera;
 ALTER TABLE profesor
@@ -932,6 +934,3 @@ SELECT * FROM distributivo;
 TRUNCATE TABLE distributivo;
 
 SELECT * FROM usuarios;
-
-ALTER TABLE distributivo
-ADD COLUMN observaciones VARCHAR(400);

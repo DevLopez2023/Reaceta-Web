@@ -73,7 +73,7 @@ $carreras = $consulta_c->fetchAll();
 <body>
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-amber w3-collapse w3-top w3-large w3-padding"
-        style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+        style="z-index:3;width:200px;font-weight:bold;" id="mySidebar"><br>
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px"><i class="fa fa-window-close" aria-hidden="true"></i></a>
         <div class="w3-container w3-center">
             <img src="imagenes/logo.png" alt="LOGO UTM" class="w3-image">
@@ -84,7 +84,7 @@ $carreras = $consulta_c->fetchAll();
         </div>
         <div class="w3-bar-block">
             <a href="" onclick="w3_close()" class="opc1 w3-bar-item w3-button w3-hover-white"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;REGISTRO</a>
-            <a href="" onclick="w3_close()" class="opc2 w3-bar-item w3-button w3-hover-white"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;REPORTE</a>
+            <a href="reporte.php" onclick="w3_close()" class="opc2 w3-bar-item w3-button w3-hover-white"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;REPORTE</a>
         </div>
 
         <br>
@@ -104,7 +104,7 @@ $carreras = $consulta_c->fetchAll();
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
     <!-- Contenido -->
-    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+    <div class="w3-main" style="margin-left:230px;margin-right:40px">
 
         <!-- Header -->
         <div class="w3-container" style="margin-top:75px" id="showcase">
@@ -137,6 +137,7 @@ $carreras = $consulta_c->fetchAll();
                 });
                 </script>';
               }
+              //session_destroy();
                 ?>
 
             <form action="distributivo.php" method="POST">
@@ -189,6 +190,7 @@ $carreras = $consulta_c->fetchAll();
                     <br> 
                     <textarea name="observaciones" class="area_de_texto" id="" cols="100" rows="7"></textarea>
                 </div>
+                <!--
                 <div class="w3-row-padding">
                     <div class="w3-half">
                     <label><b>Fecha de Inicio</b></label>
@@ -198,7 +200,7 @@ $carreras = $consulta_c->fetchAll();
                     <label><b>Fecha de Fin</b></label>
                         <input class="w3-input w3-border" name = "ff" type="date" placeholder="--/--/--">
                     </div>
-                </div>
+                </div>-->
 
                 <div class="w3-section">
                     <label><b>Técnico responsable</b></label>
