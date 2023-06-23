@@ -115,7 +115,7 @@ $fila_dm = $_SESSION['fila_dm'];
                     echo $fdm->nombre_m;
                     endforeach;?>" disabled>
                 </div>
-
+                
                 <div class="w3-section">
                 <label><b>Profesores:</b></label>
                     <input type="text" name="profesor" id="s_p" value="<?php foreach($fila_dm as $fdm):

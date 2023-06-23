@@ -35,6 +35,7 @@ $carreras = $consulta_c->fetchAll();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
     <title>Reporte | ReacETA 2023</title>
 </head>
@@ -155,25 +156,31 @@ $carreras = $consulta_c->fetchAll();
 
             <!--BOTÓN DE GENERACIÓN PDF-->
             <div class="boton_pdf w3-right">
-                <a href="" class="w3-button w3-red w3-margin-right w3-round-xxlarge"><i class="fa fa-file-pdf" aria-hidden="true"></i> Generar PDF</a>
+                <a href="rep_pdf.php?codi_carrera=<?php  $fc = $_SESSION['con'];
+                        foreach ($fc as $dd):
+                        echo $dd->cod_carrera;
+                        endforeach; ?>" class="w3-button w3-red w3-margin-right w3-round-xxlarge"><i class="fa fa-file-pdf" aria-hidden="true"></i> Generar PDF</a>
             </div>
 
         <!-- Tabla de Reporte -->
+        <div class="input-group" style="margin-top: 50px;"> <span class="input-group-addon">Búsqueda ágil: </span>
+            <input id="entradafilter" type="text" class="form-control w3-sand">
+        </div>
+
         <div class="w3-container" id="contact" style="margin-top:30px">
             <table class="w3-table w3-striped w3-border w3-responsive w3-small" style="margin-bottom:50px;">
                 <tr>
-                    <thead class="">
-                        <th>Asignatura</th>
-                        <th>U1</th>
-                        <th>U2</th>
-                        <th>U3</th>
-                        <th>U4</th>
-                        <th>Total</th>
-                        <th>Registro</th>
-                        <th>Observaciones</th>
-                        <th class="" colspan="3" style="text-align:center;"><i class="fa fa-cog" aria-hidden="true"></i> Opciones</th>
-                    </thead>
-                    <tbody>
+                    <th>Asignatura</th>
+                    <th>U1</th>
+                    <th>U2</th>
+                    <th>U3</th>
+                    <th>U4</th>
+                    <th>Total</th>
+                    <th>Registro</th>
+                    <th>Observaciones</th>
+                    <th class="" colspan="3" style="text-align:center;"><i class="fa fa-cog" aria-hidden="true"></i> Opciones</th>
+                </tr>
+                    <tbody class="contenidobusqueda">
                         <tr>
                         <div class="w3-panel">
                         <?php
@@ -199,6 +206,7 @@ $carreras = $consulta_c->fetchAll();
             </table>
         </div>
         <script src="js/conf_ventana.js"></script>
+        <script src="js/filtrar_resultados.js"></script>
 
 </body>
 

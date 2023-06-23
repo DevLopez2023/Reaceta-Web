@@ -8,7 +8,7 @@ $id_materia = $_POST['id_materia'];
 
 //HALLAR PROFESORES
 $consulta_p = $conexion_pdo->prepare("SELECT d.cod_profesor,p.nombre_p FROM distributivo d 
-INNER JOIN profesor p on p.cod_profesor = d.cod_profesor
+INNER JOIN profesor p ON p.cod_profesor = d.cod_profesor
 WHERE cod_materia = '$id_materia' AND cod_carrera = d.cod_carrera");
 
 $consulta_p->execute();
