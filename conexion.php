@@ -1,10 +1,10 @@
 <?php
 
 //Credenciales de la BD y Server
-$usuario = "eta";
-$host = "192.168.2.95";
+$usuario = "postgres";
+$host = "localhost";
 $bd = "eta";
-$pas = "123456";
+$pas = "123";
 
 try{
     $conexion_pdo = new PDO("pgsql:host = $host; dbname = $bd", $usuario, $pas);

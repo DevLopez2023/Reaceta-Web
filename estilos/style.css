@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Basic&display=swap');
 
 body,
 h1,
@@ -6,14 +6,18 @@ h2,
 h3,
 h4,
 h5 {
-    font-family: "Poppins", sans-serif;
-    margin:0;
-    padding: 0;
+  font-family: 'Basic', sans-serif;
+  margin:0;
+  padding: 0;
 }
 
 .container{
   position: relative;
   z-index: 99;
+}
+
+.slogan{
+  font-family: 'Bakbak One', cursive;
 }
 
 #particles-js{
@@ -24,9 +28,6 @@ h5 {
 
 }
 
-.capp{
-    font-family: 'Dancing Script', cursive;
-}
 .nota{
     margin-bottom: 15vh;
 }

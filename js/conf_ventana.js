@@ -15,4 +15,4 @@ function w3_open() {
     document.getElementById("modal01").style.display = "block";
     var captionText = document.getElementById("caption");
     captionText.innerHTML = element.alt;
-  }
+  } 

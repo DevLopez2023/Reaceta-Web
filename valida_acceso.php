@@ -1,7 +1,6 @@
 <?php
-
-session_start(); //sesion de inicio
 include('conexion.php'); //incluyendo conexión a BD
+session_start(); //sesion de inicio
 
 //Lo que se recibe del formulario
 $usu = $_POST["u"]; //usuario

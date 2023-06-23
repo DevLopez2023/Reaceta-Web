@@ -8,15 +8,9 @@ if (empty($_SESSION["usuario"])) {
     header("Location: index.html");
     exit();
 }
-?>
 
-<?php
-/* CARRERAS */
-$consulta_c = $conexion_pdo->prepare("SELECT * FROM carrera");
-$consulta_c->execute();
-$carreras = $consulta_c->fetchAll();
+$fila_dm = $_SESSION['fila_dm'];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -40,33 +34,6 @@ $carreras = $consulta_c->fetchAll();
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <!--Script para cargar valor de select carreras y luego validarlo con la sentencia sql en materias.php-->
-    <script language="javascript">
-    $(document).ready(function(){
-        $("#s_c").on('change', function () {
-            $('#s_p').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
-            $("#s_c option:selected").each(function () {
-                var id_carrera = $(this).val();
-                $.post("materias.php", { id_carrera: id_carrera }, function(data) {
-                    $("#s_m").html(data);
-                });			
-            });
-        });
-        });
-
-    $(document).ready(function(){
-        $("#s_m").on('change', function () {
-            $("#s_m option:selected").each(function () {
-                var id_materia = $(this).val();
-                $.post("profesores.php", { id_materia: id_materia }, function(data) {
-                    $("#s_p").html(data);
-                });
-            });
-        });
-        });
-
-    </script>
-
 </head>
 
 <body>
@@ -76,13 +43,12 @@ $carreras = $consulta_c->fetchAll();
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px"><i class="fa fa-window-close" aria-hidden="true"></i></a>
         <div class="w3-container w3-center">
             <img src="imagenes/logo.png" alt="LOGO UTM" class="w3-image">
-            <h3 class="w3-padding-64 slogan w3-center w3-xlarge"><b>ReacETA Web</b></h3>
+            <h3 class="w3-padding-64 capp w3-center w3-xxlarge"><b>ReacETA Web</b></h3>
             <?php echo "<p style='font-size:13px;'>Técnico: ". $_SESSION["usuario"]."</p>"?>
             <p style="margin:40px;"></p>
             
         </div>
         <div class="w3-bar-block">
-            <a href="" onclick="w3_close()" class="opc1 w3-bar-item w3-button w3-hover-white"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;REGISTRO</a>
             <a href="reporte.php" onclick="w3_close()" class="opc2 w3-bar-item w3-button w3-hover-white"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;REPORTE</a>
         </div>
 
@@ -104,23 +70,15 @@ $carreras = $consulta_c->fetchAll();
 
     <!-- Contenido -->
     <div class="w3-main" style="margin-left:230px;margin-right:40px">
-
-        <!-- Header -->
-        <div class="w3-container" style="margin-top:75px" id="showcase">
-            <h1 class="w3-xlarge"><b>REGISTRO DE DATOS SOBRE REACTIVOS - UTM</b></h1>
-            <hr style="width:300px;border:5px solid greenyellow" class="w3-round">
+    <!-- Header -->
+    <div class="w3-container" style="margin-top:75px" id="showcase">
+            <h1 class="w3-xlarge"><b>ACTUALIZACIÓN DE DATOS [REACTIVOS] - UTM</b></h1>
+            <hr style="width:150px;border:5px solid blue" class="w3-round">
         </div>
 
 
         <!-- Contact -->
         <div class="w3-container" id="contact" style="margin-top:30px">
-            <div class="nota w3-panel w3-light-grey">
-                <span style="font-size:150px;line-height:0.6em;opacity:0.2">&#10077;</span>
-                <p class="w3-large" style="margin-top:-40px">
-                    En este formulario, usted podrá registrar la cantidad de reactivos que ha presentado un docente sobre alguna asignatura específica.</p>
-                    <p style="font-size:20px;line-height:0.6em;opacity:0.2; text-align: right;"><i class="fa fa-users" aria-hidden="true"></i> EQUIPO ETA</p>
-              </div>
-
                <!--alert-->
             <?php
               if (!empty($_SESSION['registro'])){
@@ -138,45 +96,55 @@ $carreras = $consulta_c->fetchAll();
               }
               unset($_SESSION['registro']);
                 ?>
-
-            <form action="registrar.php" method="POST">
+            <form method="post" action="actualizar.php?cod_materia=<?php foreach($fila_dm as $fdm):
+                echo $fdm->cod_materia;
+            endforeach; ?>">
                 <div class="w3-section">
-                    <label><b>Carrera</b></label>
-                    <select class="w3-select" name="s_c" id="s_c">
-                        <option value="0" selected disabled>Seleccione una carrera</option>
-                        <?php
-                        foreach ($carreras as $c):
-                            echo '<option value="'.$c["cod_carrera"].'">'.$c["nombre_c"]."</option>'";
-                        endforeach;
-                        ?>
-                    </select>
-                    
+                <label><b>Carrera:</b></label>
+                <input type="text" name="carrera" id="s_c" value="<?php foreach($fila_dm as $fdm):
+                echo $fdm->nombre_c;
+                endforeach;?>" disabled id="carrera">
+                <input type="hidden" name="c_materia" value="<?php foreach($fila_dm as $fdm):
+                echo $fdm->cod_materia;
+                endforeach;?>">
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Asignaturas:</b></label>
-                    <select class="w3-select" name="s_m" id="s_m"></select>
+                <label><b>Materia:</b></label>
+                    <input type="text" name="materia" id="s_m" value="<?php foreach($fila_dm as $fdm):
+                    echo $fdm->nombre_m;
+                    endforeach;?>" disabled>
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Profesores:</b></label>
-                    <select class="w3-select" name="s_p" id="s_p"></select>
+                <label><b>Profesores:</b></label>
+                    <input type="text" name="profesor" id="s_p" value="<?php foreach($fila_dm as $fdm):
+                    echo $fdm->nombre_p;
+                    endforeach;?>" disabled>
                 </div>
 
 
                 <label><b>Reactivos por unidad</b></label>
                 <div class="w3-row-padding">
                     <div class="w3-third">
-                        <input class="w3-input w3-border monto" type="text" width="20" name="u1" onkeyup="sumar();" placeholder="Unidad 1" required>
+                        <input class="w3-input w3-border monto" value="<?php foreach($fila_dm as $fdm):
+                echo $fdm->unidad1;
+                endforeach;?>" type="text" width="20" name="u1" onkeyup="sumar();" placeholder="Unidad 1" required>
                     </div>
                     <div class="w3-third">
-                        <input class="w3-input w3-border monto" type="text" width="20" name="u2" onkeyup="sumar();" placeholder="Unidad 2" required>
+                        <input class="w3-input w3-border monto" value="<?php foreach($fila_dm as $fdm):
+                echo $fdm->unidad2;
+                endforeach;?>" type="text" width="20" name="u2" onkeyup="sumar();" placeholder="Unidad 2" required>
                     </div>
                     <div class="w3-third">
-                        <input class="w3-input w3-border monto" type="text" width="20" name="u3" onkeyup="sumar();" placeholder="Unidad 3" required>
+                        <input class="w3-input w3-border monto" value="<?php foreach($fila_dm as $fdm):
+                echo $fdm->unidad3;
+                endforeach;?>" type="text" width="20" name="u3" onkeyup="sumar();" placeholder="Unidad 3" required>
                     </div>
                     <div class="w3-third w3-margin-top">
-                        <input class="w3-input w3-border monto" type="text" width="20" name="u4" onkeyup="sumar();" placeholder="Unidad 4" required>
+                        <input class="w3-input w3-border monto" value="<?php foreach($fila_dm as $fdm):
+                echo $fdm->unidad4;
+                endforeach;?>" type="text" width="20" name="u4" onkeyup="sumar();" placeholder="Unidad 4" required>
                     </div>
                 </div>
 
@@ -187,27 +155,18 @@ $carreras = $consulta_c->fetchAll();
                 <div class="w3-section">
                     <label><b>Observaciones</b></label>
                     <br> 
-                    <textarea name="observaciones" class="area_de_texto" id="" cols="100" rows="7"></textarea>
+                    <input type="text" name="observaciones" value="<?php foreach($fila_dm as $fdm):
+                        echo $fdm->observaciones;
+                    endforeach;?>" id="" class="input_m">
                 </div>
-                <!--
-                <div class="w3-row-padding">
-                    <div class="w3-half">
-                    <label><b>Fecha de Inicio</b></label>
-                        <input class="w3-input w3-border" name = "fi" type="date" placeholder="--/--/--">
-                    </div>
-                    <div class="w3-half">
-                    <label><b>Fecha de Fin</b></label>
-                        <input class="w3-input w3-border" name = "ff" type="date" placeholder="--/--/--">
-                    </div>
-                </div>-->
 
                 <div class="w3-section">
-                    <label><b>REGISTRA: </b></label>
+                    <label><b>Actualiza:</b></label>
                     <input type="text" name="n_tec" id="" disabled value="<?php echo $_SESSION["usuario"]?>">
                     <input type="hidden" name="tec" id="" value="<?php echo $_SESSION["cod_usuario"]?>">
                     </select>
                 </div>
-                <input type="submit" class="w3-button w3-block w3-padding-large w3-green w3-margin-bottom" value="Registrar">
+                <input type="submit" class="w3-button w3-block w3-padding-large w3-blue w3-margin-bottom" value="Actualizar">
             </form>
         </div>
 

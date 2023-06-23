@@ -6,16 +6,20 @@ $html = '';
 //Recibiendo valor de variable id_carrera
 $id_materia = $_POST['id_materia'];
 
-//Consulta para validar que el $id_carrera sea el mismo del campo de la columna cod_carrera de la tabla materia
-$consulta_p = $conexion_pdo->prepare("SELECT id_profesor,nombre FROM profesor WHERE cod_materia = '$id_materia' ORDER BY nombre ASC");
+//HALLAR PROFESORES
+$consulta_p = $conexion_pdo->prepare("SELECT d.cod_profesor,p.nombre_p FROM distributivo d 
+INNER JOIN profesor p on p.cod_profesor = d.cod_profesor
+WHERE cod_materia = '$id_materia' AND cod_carrera = d.cod_carrera");
+
 $consulta_p->execute();
 $profesores = $consulta_p->fetchAll();
 
 //Foreach para hacer el recorrido.
 foreach($profesores as $p):
-    $html .= '<option value="'.$p['id_profesor'].'">'.$p['nombre'].'</option>';
+    $html .= '<option value="'.$p['cod_profesor'].'">'.$p['nombre_p'].'</option>';
 endforeach;
 
 //Imprimiendo el resultado de integrar la sentencia html y variable de php
+
 echo $html;
 ?>

@@ -2,6 +2,7 @@
 include('conexion.php');
 
 session_start();
+
 if (empty($_SESSION["usuario"])) {
     # Lo redireccionamos al formulario de inicio de sesión
     header("Location: index.html");
@@ -9,12 +10,11 @@ if (empty($_SESSION["usuario"])) {
 }
 ?>
 
-
 <?php
-/* CONSULTA PARA TABLA DISTRIBUTIVO */
-$consulta_distributivo = $conexion_pdo->query("SELECT * FROM distributivo");
-$fila_d = $consulta_distributivo->fetchAll(PDO::FETCH_OBJ); //lo saca como array
-
+/* CARRERAS */
+$consulta_c = $conexion_pdo->prepare("SELECT * FROM carrera ORDER BY nombre_c");
+$consulta_c->execute();
+$carreras = $consulta_c->fetchAll();
 ?>
 
 
@@ -34,8 +34,9 @@ $fila_d = $consulta_distributivo->fetchAll(PDO::FETCH_OBJ); //lo saca como array
     <!--FONTAWESOME-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <title>Reporte | ReacETA 2023</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <title>Reporte | ReacETA 2023</title>
 </head>
 
 <body>
@@ -44,7 +45,7 @@ $fila_d = $consulta_distributivo->fetchAll(PDO::FETCH_OBJ); //lo saca como array
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px"><i class="fa fa-window-close" aria-hidden="true"></i></a>
         <div class="w3-container w3-center">
             <img src="imagenes/logo.png" alt="LOGO UTM" class="w3-image">
-            <h3 class="w3-padding-64 capp w3-center w3-xxlarge"><b>ReacETA Web</b></h3>
+            <h3 class="w3-padding-64 slogan w3-center w3-xlarge"><b>ReacETA Web</b></h3>
             <?php echo "<p style='font-size:13px;'>Técnico: " . $_SESSION["usuario"] . "</p>" ?>
             <p style="margin:40px;"></p>
 
@@ -72,68 +73,131 @@ $fila_d = $consulta_distributivo->fetchAll(PDO::FETCH_OBJ); //lo saca como array
 
     <!-- Contenido -->
     <div class="w3-main" style="margin-left:230px;margin-right:40px">
+        <!--alert-->
+        <?php
+              if (!empty($_SESSION['reseteado'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Reactivos reseteados con éxito",
+                    text: "Enhorabuena",
+                    icon: "error",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+              }
+              unset($_SESSION['reseteado']);
+                ?>
 
-        <!-- Header -->
-        <div class="w3-container" style="margin-top:75px" id="showcase">
-            <h1 class="w3-xlarge"><b>REPORTE DE REACTIVOS PRESENTADOS</b></h1>
-            <hr style="width:150px;border:5px solid greenyellow" class="w3-round">
-        </div>
+            <!--alert2-->
+            <?php
+              if (!empty($_SESSION['alerta'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Debes seleccionar primero una carrera.",
+                    text: "Pilas!",
+                    icon: "warning",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+              }
+              unset($_SESSION['alerta']);
+            ?>
+            <!--alert3-->
+        <?php
+              if (!empty($_SESSION['actualizado'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Reactivos actualizados con éxito",
+                    text: "Enhorabuena",
+                    icon: "info",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+              }
+              unset($_SESSION['actualizado']);
+                ?>
 
+            <form action="busqueda_c.php" method="POST" style="margin-top:70px;">
+                <div class="w3-section">
+                    <label><b>Carrera</b></label>
+                    <select class="w3-select" name="cod_carr" required>
+                        <option value="0" selected disabled>Seleccione una carrera</option>
+                        <?php
+                        foreach ($carreras as $c):
+                            echo '<option value="'.$c["cod_carrera"].'">'.$c["nombre_c"]."</option>'";
+                        endforeach;
+                        ?>
+                    </select>
+                </div>
+                <input type="submit" class="w3-button w3-block w3-padding-large w3-amber w3-margin-bottom" value="Filtrar">
+            </form>
 
-        <!-- Contact -->
-        <div class="w3-container" id="contact" style="margin-top:30px">
-            <div class="nota w3-panel w3-light-grey">
-                <span style="font-size:150px;line-height:0.6em;opacity:0.2">&#10077;</span>
-                <p class="w3-large" style="margin-top:-40px">
-                    En esta tabla usted podrá visualizar información sobre los reactivos subidos a la plataforma. Además de poder actualizarlos o eliminarlos.</p>
-                <p style="font-size:20px;line-height:0.6em;opacity:0.2; text-align: right;"><i class="fa fa-users" aria-hidden="true"></i> EQUIPO ETA</p>
+            <div class="w3-panel">
+            <?php
+            if(!isset($_SESSION['carrera_escogida'])){
+                echo "<div class='w3-panel w3-animate-bottom w3-center w3-yellow'>No se ha eligido la carrera</div>";
+            }else{
+                $ce = $_SESSION['carrera_escogida'];
+            foreach ($ce as $cce): ?>
+               <h5 class="w3-center"><b style="color:green;">Has escogido:</b> <?php echo $cce->nombre_c; ?></h5>
+            <?php endforeach; 
+            } ?>
             </div>
+
+            <!--BOTÓN DE GENERACIÓN PDF-->
+            <div class="boton_pdf w3-right">
+                <a href="" class="w3-button w3-red w3-margin-right w3-round-xxlarge"><i class="fa fa-file-pdf" aria-hidden="true"></i> Generar PDF</a>
+            </div>
+
+        <!-- Tabla de Reporte -->
+        <div class="w3-container" id="contact" style="margin-top:30px">
             <table class="w3-table w3-striped w3-border w3-responsive w3-small" style="margin-bottom:50px;">
                 <tr>
-                    <thead class="w3-green">
-                        <th>Cod_distributivo</th>
-                        <th>Cod_carrera</th>
-                        <th>Cod_asignatura</th>
-                        <th>Id_profesor</th>
+                    <thead class="">
+                        <th>Asignatura</th>
                         <th>U1</th>
                         <th>U2</th>
                         <th>U3</th>
                         <th>U4</th>
                         <th>Total</th>
                         <th>Registro</th>
-                        <th>FF</th>
-                        <th>cod_tec</th>
                         <th>Observaciones</th>
-                        <th class="w3-black" colspan="3" style="text-align:center;"><i class="fa fa-cog" aria-hidden="true"></i> Opciones</th>
+                        <th class="" colspan="3" style="text-align:center;"><i class="fa fa-cog" aria-hidden="true"></i> Opciones</th>
                     </thead>
                     <tbody>
                         <tr>
+                        <div class="w3-panel">
                         <?php
-                        foreach ($fila_d as $dd): ?>
-                            <td><?php echo $dd->cod_distributivo; ?></td>
-                            <td><?php echo $dd->cod_carrera; ?></td>
-                            <td><?php echo $dd->cod_materia; ?></td>
-                            <td><?php echo $dd->id_profesor; ?></td>
+                        if(!isset($_SESSION['con'])){
+
+                        }else{
+                            $fc = $_SESSION['con'];
+                        foreach ($fc as $dd): ?>
+                            <td><?php echo $dd->nombre_m; ?></td>
                             <td><?php echo $dd->unidad1; ?></td>
                             <td><?php echo $dd->unidad2; ?></td>
                             <td><?php echo $dd->unidad3; ?></td>
                             <td><?php echo $dd->unidad4; ?></td>
                             <td><?php echo $dd->r_t; ?></td>
                             <td><?php echo $dd->fecha_ini; ?></td>
-                            <td><?php echo $dd->fecha_fin; ?></td>
-                            <td><?php echo $dd->cod_tec; ?></td>
                             <td><?php echo $dd->observaciones; ?></td>
-                            <td><a href="" class="w3-button w3-indigo"><i class="fa fa-pencil" aria-hidden="true"></i> Actualizar</a></td>
-                            <td><a href="" class="w3-button w3-red"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a></td>
-                            <td><a href="" class="w3-button w3-green"><i class="fa fa-handshake" aria-hidden="true"></i> Terminar</a></td>
+                            <td><a href="datos_materia.php?id_materia=<?php echo $dd->cod_materia; ?>" class="w3-button w3-indigo w3-round-xxlarge"><i class="fa fa-pencil" aria-hidden="true"></i> Inspeccionar</a></td>
+                            <td><a href="resetear.php?cod_materia=<?php echo $dd->cod_materia; ?>" class="w3-button w3-amber w3-round-xxlarge"><i class="fa fa-trash" aria-hidden="true"></i> Resetear</a></td>
                         </tr>
-                        <?php  endforeach; ?>
+                        <?php  endforeach;
+                        }?>
                     </tbody>
             </table>
         </div>
-
-
-
         <script src="js/conf_ventana.js"></script>
 
 </body>
