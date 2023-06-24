@@ -29,11 +29,13 @@ $carreras = $consulta_c->fetchAll();
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="estilos/style.css">
+
     <!--Flaticon de la Web-->
     <link rel="shortcut icon" href="imagenes/report.png" type="image/x-icon">
     <!--FONTAWESOME-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
@@ -80,7 +82,7 @@ $carreras = $consulta_c->fetchAll();
                 echo '<script type="text/javascript">
               $(document).ready(function() {
                 swal({
-                    title: "Reactivos reseteados con éxito",
+                    title: "Reactivos reseteados con éxito 🤷‍♂️",
                     text: "Enhorabuena",
                     icon: "error",
                     button: "Ok",
@@ -98,7 +100,7 @@ $carreras = $consulta_c->fetchAll();
                 echo '<script type="text/javascript">
               $(document).ready(function() {
                 swal({
-                    title: "Debes seleccionar primero una carrera.",
+                    title: "Ya esta filtrado en la actual carrera, para filtrar otra debe seleccionarla primeramente del menu 😲",
                     text: "Pilas!",
                     icon: "warning",
                     button: "Ok",
@@ -115,7 +117,7 @@ $carreras = $consulta_c->fetchAll();
                 echo '<script type="text/javascript">
               $(document).ready(function() {
                 swal({
-                    title: "Reactivos actualizados con éxito",
+                    title: "Reactivos actualizados con éxito 🙊",
                     text: "Enhorabuena",
                     icon: "info",
                     button: "Ok",
@@ -150,17 +152,32 @@ $carreras = $consulta_c->fetchAll();
                 $ce = $_SESSION['carrera_escogida'];
             foreach ($ce as $cce): ?>
                <h5 class="w3-center"><b style="color:green;">Has escogido:</b> <?php echo $cce->nombre_c; ?></h5>
-            <?php endforeach; 
+            <?php endforeach;
             } ?>
             </div>
 
+            <?php
+            if(empty($_SESSION['con'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Primer paso, seleccione una carrera 😄",
+                    text: "Pilas!",
+                    icon: "warning",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+            }else{?>
             <!--BOTÓN DE GENERACIÓN PDF-->
             <div class="boton_pdf w3-right">
-                <a href="rep_pdf.php?codi_carrera=<?php  $fc = $_SESSION['con'];
-                        foreach ($fc as $dd):
-                        echo $dd->cod_carrera;
-                        endforeach; ?>" class="w3-button w3-red w3-margin-right w3-round-xxlarge"><i class="fa fa-file-pdf" aria-hidden="true"></i> Generar PDF</a>
+                <a href="rep_pdf.php?codi_carrera=<?php $fc = $_SESSION['con'];
+                foreach ($fc as $dd):
+                    echo $dd->cod_carrera;
+                endforeach; ?>" class="w3-button w3-red w3-margin-right w3-round-xxlarge"><i class="fa fa-file-pdf" aria-hidden="true"></i> Generar PDF</a>
             </div>
+            <?php } ?>
 
         <!-- Tabla de Reporte -->
         <div class="input-group" style="margin-top: 50px;"> <span class="input-group-addon">Búsqueda ágil: </span>
@@ -207,6 +224,8 @@ $carreras = $consulta_c->fetchAll();
         </div>
         <script src="js/conf_ventana.js"></script>
         <script src="js/filtrar_resultados.js"></script>
+
+
 
 </body>
 

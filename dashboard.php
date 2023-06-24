@@ -36,9 +36,12 @@ $carreras = $consulta_c->fetchAll();
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
     <title>ReacETA 2023</title>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
     <!--Script para cargar valor de select carreras y luego validarlo con la sentencia sql en materias.php-->
     <script language="javascript">
@@ -66,10 +69,21 @@ $carreras = $consulta_c->fetchAll();
         });
 
     </script>
-
 </head>
 
 <body>
+    <!--LOADER-->
+    <div id="loader-wrapper">
+        <div id="loader">
+            <div class="logou"><img src="imagenes/logo2_loader.gif" alt="" width="80"></div>
+            <p>🔰 UTM UNIDOS 🔰</p>
+        </div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+
+
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-amber w3-collapse w3-top w3-large w3-padding"
         style="z-index:3;width:200px;font-weight:bold;" id="mySidebar"><br>
@@ -104,7 +118,6 @@ $carreras = $consulta_c->fetchAll();
 
     <!-- Contenido -->
     <div class="w3-main" style="margin-left:230px;margin-right:40px">
-
         <!-- Header -->
         <div class="w3-container" style="margin-top:75px" id="showcase">
             <h1 class="w3-xlarge"><b>REGISTRO DE DATOS SOBRE REACTIVOS - UTM</b></h1>
@@ -189,17 +202,6 @@ $carreras = $consulta_c->fetchAll();
                     <br> 
                     <textarea name="observaciones" class="area_de_texto" id="" cols="100" rows="7"></textarea>
                 </div>
-                <!--
-                <div class="w3-row-padding">
-                    <div class="w3-half">
-                    <label><b>Fecha de Inicio</b></label>
-                        <input class="w3-input w3-border" name = "fi" type="date" placeholder="--/--/--">
-                    </div>
-                    <div class="w3-half">
-                    <label><b>Fecha de Fin</b></label>
-                        <input class="w3-input w3-border" name = "ff" type="date" placeholder="--/--/--">
-                    </div>
-                </div>-->
 
                 <div class="w3-section">
                     <label><b>REGISTRA: </b></label>
@@ -214,6 +216,7 @@ $carreras = $consulta_c->fetchAll();
         <script src="js/conf_ventana.js"></script>
         <script src="js/suma.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="js/loader.js"></script>
 
 </body>
 </html>
