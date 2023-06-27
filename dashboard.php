@@ -150,7 +150,7 @@ $carreras = $consulta_c->fetchAll();
 
             <form action="registrar.php" method="POST">
                 <div class="w3-section">
-                    <label><b>Carrera</b></label>
+                    <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Carrera</b></label>
                     <select class="w3-select" name="s_c" id="s_c">
                         <option value="0" selected disabled>Seleccione una carrera</option>
                         <?php
@@ -163,17 +163,17 @@ $carreras = $consulta_c->fetchAll();
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Asignaturas:</b></label>
+                    <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Asignaturas:</b></label>
                     <select class="w3-select" name="s_m" id="s_m"></select>
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Profesores:</b></label>
+                    <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Profesores:</b></label>
                     <select class="w3-select" name="s_p" id="s_p"></select>
                 </div>
 
 
-                <label><b>Reactivos por unidad</b></label>
+                <label class="w3-tag w3-padding w3-round-large w3-light-grey w3-margin-bottom"><b>Reactivos por unidad</b></label>
                 <div class="w3-row-padding">
                     <div class="w3-third">
                         <input class="w3-input w3-border monto" type="text" width="20" name="u1" onkeyup="sumar();" placeholder="Unidad 1" required>
@@ -190,13 +190,18 @@ $carreras = $consulta_c->fetchAll();
                 </div>
 
                 <div class="w3-section">
-                    <label><b>Total de reactivos</b></label>
+                    <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Total de reactivos</b></label>
                     <p><b>N°= </b><span id="res" class="w3-large" name="total"></span></p>
                 </div>
                 <div class="w3-section">
-                    <label><b>Observaciones</b></label>
-                    <br> 
-                    <textarea name="observaciones" class="area_de_texto" id="" cols="100" rows="7"></textarea>
+                    <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Observaciones</b></label>
+                    <br>
+                    <input class="w3-radio" type="radio" name="observaciones" value="CUMPLE" checked>
+                    <label>CUMPLE</label>
+                    <input class="w3-radio" type="radio" name="observaciones" value="CUMPLE PARCIALMENTE">
+                    <label>CUMPLE PARCIALMENTE</label>
+                    <input class="w3-radio" type="radio" name="observaciones" value="NO CUMPLE">
+                    <label>NO CUMPLE</label>
                 </div>
 
                 <div class="w3-section">

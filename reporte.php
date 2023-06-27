@@ -188,6 +188,7 @@ $carreras = $consulta_c->fetchAll();
             <table class="w3-table w3-striped w3-border w3-responsive w3-small" style="margin-bottom:50px;">
                 <tr>
                     <th>Asignatura</th>
+                    <th>Profesor</th>
                     <th>U1</th>
                     <th>U2</th>
                     <th>U3</th>
@@ -207,6 +208,7 @@ $carreras = $consulta_c->fetchAll();
                             $fc = $_SESSION['con'];
                         foreach ($fc as $dd): ?>
                             <td><?php echo $dd->nombre_m; ?></td>
+                            <td><?php echo $dd->nombre_p; ?></td>
                             <td><?php echo $dd->unidad1; ?></td>
                             <td><?php echo $dd->unidad2; ?></td>
                             <td><?php echo $dd->unidad3; ?></td>
@@ -214,8 +216,8 @@ $carreras = $consulta_c->fetchAll();
                             <td><?php echo $dd->r_t; ?></td>
                             <td><?php echo $dd->fecha_ini; ?></td>
                             <td><?php echo $dd->observaciones; ?></td>
-                            <td><a href="datos_materia.php?id_materia=<?php echo $dd->cod_materia; ?>" class="w3-button w3-indigo w3-round-xxlarge"><i class="fa fa-pencil" aria-hidden="true"></i> Inspeccionar</a></td>
-                            <td><a href="resetear.php?cod_materia=<?php echo $dd->cod_materia; ?>" class="w3-button w3-amber w3-round-xxlarge"><i class="fa fa-trash" aria-hidden="true"></i> Resetear</a></td>
+                            <td><a href="datos_materia.php?id_materia=<?php echo $dd->cod_profesor; ?>" class="w3-button w3-indigo w3-round-xxlarge"><i class="fa fa-pencil" aria-hidden="true"></i> Inspeccionar</a></td>
+                            <td><a href="resetear.php?cod_materia=<?php echo $dd->cod_profesor; ?>" class="w3-button w3-amber w3-round-xxlarge"><i class="fa fa-trash" aria-hidden="true"></i> Resetear</a></td>
                         </tr>
                         <?php  endforeach;
                         }?>

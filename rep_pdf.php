@@ -17,7 +17,7 @@ if (!empty($_GET)) {
     /*$sqlMateria = $conexion_pdo->query("SELECT nombre_m,unidad1,unidad2,unidad3,unidad4,r_t,fecha_ini,observaciones FROM materia WHERE cod_carrera = '$c_c' ORDER BY cod_materia");*/
 
     //CONSULTA PARA SACAR TODOS LOS DATOS - CARRERA>ASIGNATURA>PROFESOR SQL
-    $sqlMateria = $conexion_pdo->query("SELECT p.nombre_p, m.cod_materia,c.nombre_c,m.nombre_m,m.unidad1,m.unidad2,m.unidad3,m.unidad4,m.r_t,m.fecha_ini,m.observaciones
+    $sqlMateria = $conexion_pdo->query("SELECT p.nombre_p, m.cod_materia,c.nombre_c,m.nombre_m,d.unidad1,d.unidad2,d.unidad3,d.unidad4,d.r_t,d.fecha_ini,d.observaciones
     FROM distributivo d INNER JOIN materia AS m
     ON d.cod_carrera = '$c_c' AND d.cod_materia = m.cod_materia
     INNER JOIN carrera AS c ON c.cod_carrera = d.cod_carrera
@@ -55,7 +55,7 @@ if (!empty($_GET)) {
     $pdf->SetFont("Arial", "", 9);
 
     //Tamaño de letra de contenido (asignaturas).
-    $pdf->SetFontSize("4.5");
+    $pdf->SetFontSize("4");
 
     //impresión de asignaturas en celdas
     foreach($resultadoMateria as $r_m):

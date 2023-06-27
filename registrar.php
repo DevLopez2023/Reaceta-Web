@@ -4,8 +4,8 @@ include('conexion.php');
 session_start();
 
 $materia = $_POST['s_m'];
-$carrera = $_POST['s_c'];
-$nombre_mat = $_POST['s_p'];
+echo $materia;
+$profesor = $_POST['s_p'];
 $reac1 = $_POST['u1'];
 $reac2 = $_POST['u2'];
 $reac3 = $_POST['u3'];
@@ -16,14 +16,14 @@ $fi = date("d-m-Y h:i:s"); //fecha actual en la que se hace el registro
 $obs = $_POST['observaciones'];
 
 
-$sentencia_d = $conexion_pdo->prepare("UPDATE materia SET unidad1 = '$reac1',
+$sentencia_d = $conexion_pdo->prepare("UPDATE distributivo SET unidad1 = '$reac1',
 unidad2 = '$reac2',
 unidad3 = '$reac3',
 unidad4 = '$reac4',
 r_t = '$reac_t',
 fecha_ini = '$fi',
 observaciones = '$obs'
-WHERE cod_materia = '$materia'");
+WHERE cod_materia = '$materia' AND cod_profesor = '$profesor';");
 
 $sentencia_d->execute();
 

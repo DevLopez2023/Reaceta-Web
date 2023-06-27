@@ -6,9 +6,9 @@ session_start();
 $cod_mate = $_GET['id_materia'];
 
 /*CONSULTA PARA SACAR TODOS LOS DATOS - CARRERA>ASIGNATURA>PROFESOR SQL*/
-$sel_mat = $conexion_pdo->query("SELECT DISTINCT p.nombre_p, m.cod_materia,c.nombre_c,m.nombre_m,m.unidad1,m.unidad2,m.unidad3,m.unidad4,m.r_t,m.observaciones
+$sel_mat = $conexion_pdo->query("SELECT DISTINCT p.nombre_p, p.cod_profesor, m.cod_materia,c.nombre_c,m.nombre_m,d.unidad1,d.unidad2,d.unidad3,d.unidad4,d.r_t,d.observaciones
 FROM distributivo d INNER JOIN carrera AS c
-ON d.cod_materia = '$cod_mate' AND d.cod_carrera = c.cod_carrera
+ON d.cod_profesor = '$cod_mate' AND d.cod_carrera = c.cod_carrera
 INNER JOIN materia AS m ON m.cod_materia = d.cod_materia
 INNER JOIN profesor AS p ON p.cod_profesor = d.cod_profesor;");
 

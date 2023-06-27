@@ -97,34 +97,38 @@ $fila_dm = $_SESSION['fila_dm'];
               unset($_SESSION['registro']);
                 ?>
             <form method="post" action="actualizar.php?cod_materia=<?php foreach($fila_dm as $fdm):
-                echo $fdm->cod_materia;
+                echo $fdm->cod_profesor;
             endforeach; ?>">
                 <div class="w3-section">
-                <label><b>Carrera:</b></label>
-                <input type="text" name="carrera" id="s_c" value="<?php foreach($fila_dm as $fdm):
-                echo $fdm->nombre_c;
-                endforeach;?>" disabled id="carrera">
-                <input type="hidden" name="c_materia" value="<?php foreach($fila_dm as $fdm):
-                echo $fdm->cod_materia;
+                <label class="w3-tag w3-padding w3-round-large w3-light-grey w3-margin-bottom"><b>Carrera:</b></label>
+                <input type="text" name="carrera" id="s_c" value="<?php
+                foreach($fila_dm as $fdm):
+                    echo $fdm->nombre_c;
+                endforeach; ?>" disabled id="carrera">
+
+                <input type="hidden" name="c_materia" value="<?php 
+                foreach($fila_dm as $fdm):
+                    echo $fdm->cod_materia;
                 endforeach;?>">
                 </div>
 
                 <div class="w3-section">
-                <label><b>Materia:</b></label>
-                    <input type="text" name="materia" id="s_m" value="<?php foreach($fila_dm as $fdm):
-                    echo $fdm->nombre_m;
+                <label class="w3-tag w3-padding w3-round-large w3-light-grey w3-margin-bottom"><b>Materia:</b></label>
+                    <input type="text" name="materia" id="s_m" value="<?php 
+                    foreach($fila_dm as $fdm):
+                        echo $fdm->nombre_m;
                     endforeach;?>" disabled>
                 </div>
-                
+
+                <!--INPUT PARA PROFESORES QUE DAN LA ASIGNATURA-->
                 <div class="w3-section">
-                <label><b>Profesores:</b></label>
+                <label class="w3-tag w3-padding w3-round-large w3-light-grey w3-margin-bottom"><b>Profesores:</b></label>
                     <input type="text" name="profesor" id="s_p" value="<?php foreach($fila_dm as $fdm):
                     echo $fdm->nombre_p;
                     endforeach;?>" disabled>
                 </div>
 
-
-                <label><b>Reactivos por unidad</b></label>
+                <label class="w3-tag w3-padding w3-round-large w3-light-grey w3-margin-bottom"><b>Reactivos por unidad</b></label>
                 <div class="w3-row-padding">
                     <div class="w3-third">
                         <input class="w3-input w3-border monto" value="<?php foreach($fila_dm as $fdm):
@@ -148,16 +152,19 @@ $fila_dm = $_SESSION['fila_dm'];
                     </div>
                 </div>
 
-                <div class="w3-section">
+                <div class="w3-section w3-tag w3-padding w3-round-large w3-light-grey">
                     <label><b>Total de reactivos</b></label>
                     <p><b>N°= </b><span id="res" class="w3-large" name="total"></span></p>
                 </div>
                 <div class="w3-section">
-                    <label><b>Observaciones</b></label>
-                    <br> 
-                    <input type="text" name="observaciones" value="<?php foreach($fila_dm as $fdm):
-                        echo $fdm->observaciones;
-                    endforeach;?>" id="" class="input_m">
+                    <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Observaciones</b></label>
+                    <br>
+                    <input class="w3-radio" type="radio" name="observaciones" value="CUMPLE" checked>
+                    <label>CUMPLE</label>
+                    <input class="w3-radio" type="radio" name="observaciones" value="CUMPLE PARCIALMENTE">
+                    <label>CUMPLE PARCIALMENTE</label>
+                    <input class="w3-radio" type="radio" name="observaciones" value="NO CUMPLE">
+                    <label>NO CUMPLE</label>
                 </div>
 
                 <div class="w3-section">
