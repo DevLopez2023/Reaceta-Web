@@ -1,7 +1,7 @@
 particlesJS({
     "particles": {
         "number": {
-          "value": 600,
+          "value": 400,
           "density": {
             "enable": true,
             "value_area": 1340.2289426382008
@@ -11,10 +11,10 @@ particlesJS({
           "value": "#9bea93"
         },
         "shape": {
-          "type": "star",
+          "type": "circle",
           "stroke": {
             "width": 0,
-            "color": "#9bea93"
+            "color": "#2dfd32"
           },
           "polygon": {
             "nb_sides": 5

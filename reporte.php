@@ -43,12 +43,12 @@ $carreras = $consulta_c->fetchAll();
 </head>
 
 <body>
+    
     <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-amber w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:200px; font-weight:bold;" id="mySidebar"><br>
+    <nav class="w3-sidebar w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:200px; font-weight:bold; background: linear-gradient(0deg, rgba(255,255,0,1) 0%, rgba(45,253,50,1) 100%);" id="mySidebar"><br>
         <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px"><i class="fa fa-window-close" aria-hidden="true"></i></a>
         <div class="w3-container w3-center">
-            <img src="imagenes/logo.png" alt="LOGO UTM" class="w3-image">
-            <h3 class="w3-padding-64 slogan w3-center w3-xlarge"><b>ReacETA Web</b></h3>
+            <img src="imagenes/logo.png" alt="LOGO UTM" class="w3-image" width="200%">
             <?php echo "<p style='font-size:13px;'>Técnico: " . $_SESSION["usuario"] . "</p>" ?>
             <p style="margin:40px;"></p>
 
