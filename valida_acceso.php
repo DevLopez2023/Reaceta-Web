@@ -15,7 +15,8 @@ $filas = $sentencia->fetchAll(PDO::FETCH_OBJ); //lo saca como array
 
 
 if (empty($filas[0]->usuario)){ //Si no existe valor en el campo usuario de la tabla usuarios
-    echo "El usuario no existe en la BD eta";
+    $_SESSION['error'] = "Usuario y/o contraseña incorrecta";
+    header('Location: index.php');
 }else{ //caso contrario se almacena en la variable de sesion[usuario] el valor de la columna nombre_tec.
     $_SESSION['usuario'] = $filas[0]->nombre_tec;
     $_SESSION['cod_usuario'] = $filas[0]->cod_tec;
