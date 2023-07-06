@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //Credenciales de la BD y Server
 $DB_USER = "postgres";
 $DB_HOST = "containers-us-west-43.railway.app";
