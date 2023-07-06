@@ -1,6 +1,6 @@
 <?php
-session_start();
 include('conexion.php');
+session_start();
 
 if($_POST['cod_carr'] == 0){
     $_SESSION['alerta'] = "Debes seleccionar una carrera";
