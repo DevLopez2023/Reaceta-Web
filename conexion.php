@@ -1,10 +1,10 @@
 <?php
 
 //Credenciales de la BD y Server
-$DB_USER = "";
-$DB_HOST = "";
-$DB_NAME = "";
-$DB_PASSWORD = "";
+$DB_USER = "postgres";
+$DB_HOST = "containers-us-west-43.railway.app";
+$DB_NAME = "railway";
+$DB_PASSWORD = "u0eCMiHvRDadpEZtVKSr";
 
 try{
     $conexion_pdo = new PDO("pgsql:host = $DB_HOST; dbname = $DB_NAME", $DB_USER, $DB_PASSWORD);
