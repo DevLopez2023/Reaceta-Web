@@ -1,12 +1,12 @@
-
 <?php
 include('conexion.php');
-
 session_start();
+
+
 if (empty($_SESSION["usuario"])) {
     # Lo redireccionamos al formulario de inicio de sesión
     header("Location: index.html");
-    exit();
+    //exit();
 }
 
 $fila_dm = $_SESSION['fila_dm'];
