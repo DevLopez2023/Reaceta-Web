@@ -1,11 +1,10 @@
-
 <?php
-include('conexion.php');
 session_start();
+include('conexion.php');
 
 if (empty($_SESSION["usuario"])) {
     # Lo redireccionamos al formulario de inicio de sesión
-    header("Location: index.html");
+    header("Location: index.php");
     exit();
 }
 ?>
