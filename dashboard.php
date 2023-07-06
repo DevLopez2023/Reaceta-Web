@@ -129,6 +129,24 @@ $carreras = $consulta_c->fetchAll();
                     <p style="font-size:20px;line-height:0.6em;opacity:0.2; text-align: right;"><i class="fa fa-users" aria-hidden="true"></i> EQUIPO ETA</p>
               </div>
 
+            <?php
+              if (!empty($_SESSION['registro'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Reactivos registrados con éxito",
+                    text: "Enhorabuena",
+                    icon: "success",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+              }
+              unset($_SESSION['registro']);
+                ?>
+
+
             <form action="registrar.php" method="POST">
                 <div class="w3-section">
                     <label class="w3-tag w3-padding w3-round-large w3-light-grey"><b>Carrera</b></label>
