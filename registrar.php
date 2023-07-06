@@ -3,7 +3,7 @@ include('conexion.php');
 session_start();
 
 $materia = $_POST['s_m'];
-//echo $materia;
+echo $materia;
 $profesor = $_POST['s_p'];
 $reac1 = $_POST['u1'];
 $reac2 = $_POST['u2'];
@@ -26,11 +26,10 @@ WHERE cod_materia = '$materia' AND cod_profesor = '$profesor';");
 
 $sentencia_d->execute();
 
-if($sentencia_d){
+if($sentencia_d == true){
     $_SESSION['registro'] = "Reactivos registrados";
     header("Location: dashboard.php");
 }else{
     header("Location: index.php");
 }
-
 ?>
