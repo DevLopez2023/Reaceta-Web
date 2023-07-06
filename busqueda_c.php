@@ -2,7 +2,7 @@
 include('conexion.php');
 session_start();
 
-if(isset($_POST['cod_carr']) || $_POST['cod_carr'] == 0){
+if(!isset($_POST['cod_carr']) || $_POST['cod_carr'] == 0){
     $_SESSION['alerta'] = "Debes seleccionar una carrera";
     header('Location: reporte.php');
 }else{
