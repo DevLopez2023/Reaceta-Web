@@ -28,7 +28,7 @@ $sentencia_d->execute();
 
 if($sentencia_d == true){
     $_SESSION['registro'] = "Reactivos registrados";
-    //header("Location: dashboard.php");
+    header("Location: dashboard.php");
 }else{
     header("Location: index.php");
 }
