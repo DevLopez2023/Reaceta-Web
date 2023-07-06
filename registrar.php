@@ -26,7 +26,7 @@ WHERE cod_materia = '$materia' AND cod_profesor = '$profesor';");
 
 $sentencia_d->execute();
 
-if(!empty(sentencia_d){
+if(!empty($sentencia_d){
     $_SESSION['registro'] = "Reactivos registrados";
     header("Location: dashboard.php");
 }else{
