@@ -129,6 +129,24 @@ $carreras = $consulta_c->fetchAll();
               unset($_SESSION['actualizado']);
                 ?>
 
+        <!--alert-->
+            <?php
+              if (!empty($_SESSION['registro'])){
+                echo '<script type="text/javascript">
+              $(document).ready(function() {
+                swal({
+                    title: "Reactivos registrados con éxito, ahora lo puede ver en el reporte.",
+                    text: "Enhorabuena",
+                    icon: "success",
+                    button: "Ok",
+                    timer: 2000
+                });
+                });
+                </script>';
+              }
+              unset($_SESSION['registro']);
+                ?>
+
             <form action="busqueda_c.php" method="POST" style="margin-top:70px;">
                 <div class="w3-section">
                     <label><b>Carrera</b></label>
