@@ -24,7 +24,7 @@ fecha_ini = '$fi',
 observaciones = '$obs'
 WHERE cod_materia = '$materia' AND cod_profesor = '$profesor';");
 
-$sentencia_d->execute();
+$sentencia_d->execute($sentencia_d);
 
 if($sentencia_d == true){
     $_SESSION['registro'] = "Reactivos registrados";
