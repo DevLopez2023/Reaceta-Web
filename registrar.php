@@ -15,7 +15,7 @@ $fi = date("d-m-Y"); //fecha actual en la que se hace el registro
 $obs = $_POST['observaciones'];
 
 
-$sentencia_d = $conexion_pdo->prepare("UPDATE distributivo SET unidad1 = '$reac1',
+$sentencia_d = $conexion_pdo->query("UPDATE distributivo SET unidad1 = '$reac1',
 unidad2 = '$reac2',
 unidad3 = '$reac3',
 unidad4 = '$reac4',
