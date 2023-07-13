@@ -10,7 +10,7 @@ $reac2 = $_POST['u2'];
 $reac3 = $_POST['u3'];
 $reac4 = $_POST['u4'];
 $reac_t = (int) $reac1+$reac2+$reac3+$reac4;
-$fi = date("d-m-Y h:i:s"); //fecha actual en la que se hace el registro
+$fi = date("d-m-Y"); //fecha actual en la que se hace el registro
 //$ff = $_POST['ff'];
 $obs = $_POST['observaciones'];
 
