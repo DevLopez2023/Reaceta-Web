@@ -10,7 +10,7 @@ if(isset($_GET['cod_materia'])){
     $un3 = $_POST['u3']; 
     $un4 = $_POST['u4'];
     $reac_t = (int) $un1+$un2+$un3+$un4;
-    $fei = date("d-m-Y h:i:s"); //fecha actual en la que se hace el registro
+    $fei = date("Y-m-d"); //fecha actual en la que se hace el registro
     $obs = $_POST['observaciones'];
 
     $sentencia_a = $conexion_pdo->prepare("UPDATE distributivo SET unidad1 = '$un1',
